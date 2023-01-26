@@ -6,5 +6,4 @@ class User < ApplicationRecord
   def most_recent_posts
     Post.where(AuthorId: id).last(3)
   end
-
 end
