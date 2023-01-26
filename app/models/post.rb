@@ -14,5 +14,4 @@ class Post < ApplicationRecord
   end
 
   private :updates_the_posts_counter
-
 end
