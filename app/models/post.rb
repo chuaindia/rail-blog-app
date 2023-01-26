@@ -15,7 +15,4 @@ class Post < ApplicationRecord
 
   private :updates_the_posts_counter
 
-  validates :Title, presence: true, length: { maximum: 250 }
-  validates :CommentCounter, numericality: { greater_than_or_equal_to: 0 }
-  validates :LikeCounter, numericality: { greater_than_or_equal_to: 0 }
 end
