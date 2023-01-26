@@ -7,6 +7,4 @@ class User < ApplicationRecord
     Post.where(AuthorId: id).last(3)
   end
 
-  validates :Name, presence: true
-  validates :PostCounter, numericality: { greater_than_or_equal_to: 0 }
 end
