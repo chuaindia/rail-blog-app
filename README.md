@@ -235,4 +235,6 @@ I would like to thank...
 
 This project is [MIT](./LICENSE) licensed.
 
+NOTE: we recommend using the MIT license - you can set it up quickly by using templates available on GitHub. You can also use any other license if you wish.
+
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
