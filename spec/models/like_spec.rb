@@ -6,12 +6,13 @@ RSpec.describe Comment, type: :model do
   before { subject.save }
 
   before(:each) do
-    @post = Post.create(AuthorId: subject.id, Title: 'dummy post', Text: 'This is a test for the latest_posts method')
+    @post = Post.create(AuthorId: subject.id, Title: 'check post',
+                        Text: 'Unit test for the method of most_recent_posts')
     @comment = Comment.create(AuthorId: subject.id, PostId: @post.id,
-                              Text: 'This is a test for the most_recent_comments method')
+                              Text: 'Unit test for the method of most_recent_comments')
   end
 
-  it 'AuthorId should be present and correct' do
+  it 'Correct AuthorId is present' do
     like = Like.new(AuthorId: subject.id, PostId: @post.id)
 
     id = like.AuthorId

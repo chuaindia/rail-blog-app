@@ -6,57 +6,58 @@ RSpec.describe Post, type: :model do
   before { subject.save }
 
   before(:each) do
-    @post = Post.create(AuthorId: subject.id, Title: 'dummy post', Text: 'This is a test for the latest_posts method')
+    @post = Post.create(AuthorId: subject.id, Title: 'check post',
+                        Text: 'Unit test for the method of most_recent_posts')
   end
 
-  it 'Title should be dummy post' do
+  it 'Title is check post' do
     title = @post.Title
 
-    expect(title).to eq('dummy post')
+    expect(title).to eq('check post')
   end
 
-  it 'Title should not be blank' do
+  it 'Title must be there' do
     @post.Title
 
     expect(@post).to be_valid
   end
 
-  it 'CommentCounter should be zero' do
-    val = @post.CommentCounter
+  it 'CommentCounter is equal to zero' do
+    value = @post.CommentCounter
 
-    expect(val).to eq 0
+    expect(value).to eq 0
   end
 
-  it 'CommentCounter should be valid' do
+  it 'Valid CommentCounter must be there' do
     @post.CommentCounter
 
     expect(@post).to be_valid
   end
 
-  it 'LikeCounter should be zero' do
-    val = @post.LikeCounter
+  it 'LikeCounter is equal to zero' do
+    value = @post.LikeCounter
 
-    expect(val).to eq 0
+    expect(value).to eq 0
   end
 
-  it 'LikeCounter should be valid' do
+  it 'Valid LikeCounter must be there' do
     @post.LikeCounter
 
     expect(@post).to be_valid
   end
 
-  it 'most_recent_comments should return nil' do
+  it 'most_recent_comments should return zero' do
     comments = @post.most_recent_comments
 
     expect(comments).to eq []
   end
 
-  it 'most_recent_comments should return 3 of the most recent post' do
+  it 'most_recent_comments should give 3 of the most recent post' do
     comment = Comment.create(AuthorId: subject.id, PostId: @post.id,
-                             Text: 'This is a test for the most_recent_comments method')
+                             Text: 'Unit test for the method of most_recent_comments')
 
-    latest = @post.most_recent_comments
+    recent = @post.most_recent_comments
 
-    expect(latest).to eq [comment]
+    expect(recent).to eq [comment]
   end
 end

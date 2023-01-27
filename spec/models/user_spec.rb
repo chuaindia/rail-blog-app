@@ -5,41 +5,41 @@ RSpec.describe User, type: :model do
 
   before { subject.save }
 
-  it 'Name should be tom' do
+  it 'Tom is the required name' do
     name = subject.Name
 
     expect(name).to eq('Tom')
   end
 
-  it 'Name should not be blank' do
+  it 'Name must be given' do
     subject.Name
 
     expect(subject).to be_valid
   end
 
-  it 'PostCounter should be zero' do
-    val = subject.PostCounter
+  it 'PostCounter is zero' do
+    value = subject.PostCounter
 
-    expect(val).to eq 0
+    expect(value).to eq 0
   end
 
-  it 'PostCounter should be valid' do
+  it 'Valid PostCounter' do
     subject.PostCounter
 
     expect(subject).to be_valid
   end
 
-  it 'latest_posts should return nil' do
+  it 'recent_posts should return zero' do
     posts = subject.latest_posts
 
     expect(posts).to eq []
   end
 
-  it 'latest_posts should return 3 of the most recent post' do
-    post = Post.create(AuthorId: subject.id, Title: 'dummy post', Text: 'This is a test for the latest_posts method')
+  it 'recent_posts should return 3 of the most recent post' do
+    post = Post.create(AuthorId: subject.id, Title: 'check post', Text: 'Unit test for the method of most_recent_posts')
 
-    latest = subject.latest_posts
+    recent = subject.latest_posts
 
-    expect(latest).to eq [post]
+    expect(recent).to eq [post]
   end
 end
