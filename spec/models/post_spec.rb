@@ -1,63 +1,59 @@
 require 'rails_helper'
 
 RSpec.describe Post, type: :model do
-  subject { User.new(Name: 'Tom', Image: 'https://unsplash.com/photos/F_-0BxGuVvo', Bio: 'Teacher from Mexico.') }
-
-  before { subject.save }
-
-  before(:each) do
-    @post = Post.create(AuthorId: subject.id, Title: 'check post',
-                        Text: 'Unit test for the method of most_recent_posts')
+  it 'Post without name' do
+    post = Post.create(user_id: 1, Text: 'Hello1')
+    expect(post).to_not be_valid
   end
 
-  it 'Title is check post' do
-    title = @post.Title
-
-    expect(title).to eq('check post')
+  it 'Post with comment counter negative' do
+    post = Post.create(user_id: 1, Text: 'Hello1')
+    post.CommentCounter = -1
+    expect(post).to_not be_valid
   end
 
-  it 'Title must be there' do
-    @post.Title
-
-    expect(@post).to be_valid
+  it 'Post with comment counter decimal' do
+    post = Post.create(user_id: 1, Text: 'Hello1')
+    post.CommentCounter = 2.2
+    expect(post).to_not be_valid
   end
 
-  it 'CommentCounter is equal to zero' do
-    value = @post.CommentCounter
-
-    expect(value).to eq 0
+  it 'Post with likes counter decimal' do
+    post = Post.create(user_id: 1, Text: 'Hello1')
+    post.LikeCounter = 2.2
+    expect(post).to_not be_valid
   end
 
-  it 'Valid CommentCounter must be there' do
-    @post.CommentCounter
-
-    expect(@post).to be_valid
+  it 'Post with likes counter decimal' do
+    post = Post.create(user_id: 1, Text: 'Hello1')
+    post.LikeCounter = 2.2
+    expect(post).to_not be_valid
   end
 
-  it 'LikeCounter is equal to zero' do
-    value = @post.LikeCounter
-
-    expect(value).to eq 0
+  it 'Post with title length >250 characters' do
+    post = Post.create(user_id: 1, Title: 'one', Text: 'Hello1')
+    post.Title = (0...255).map { 'a' }.join
+    expect(post).to_not be_valid
   end
 
-  it 'Valid LikeCounter must be there' do
-    @post.LikeCounter
+  it 'Update post counter' do
+    user = User.create(Name: 'John', Image: 'www.google.com', Bio: 'Male')
+    Post.create(user_id: user.id, Title: 'hello', Text: 'Hello1')
+    user2 = User.first
 
-    expect(@post).to be_valid
+    expect(user2.PostCounter).to eq(1)
   end
 
-  it 'most_recent_comments should return zero' do
-    comments = @post.most_recent_comments
+  it 'last 5 comm' do
+    user = User.create(Name: 'John', Image: 'www.google.com', Bio: 'Male')
+    post = Post.create(user_id: 1, Title: 'Title1', Text: 'Hello1')
+    Comment.create(Text: 'chua', user_id: user.id, post_id: post.id)
+    Comment.create(Text: 'chua', user_id: user.id, post_id: post.id)
+    Comment.create(Text: 'chua', user_id: user.id, post_id: post.id)
+    Comment.create(Text: 'chua', user_id: user.id, post_id: post.id)
+    Comment.create(Text: 'chua', user_id: user.id, post_id: post.id)
+    Comment.create(Text: 'chua', user_id: user.id, post_id: post.id)
 
-    expect(comments).to eq []
-  end
-
-  it 'most_recent_comments should give 3 of the most recent post' do
-    comment = Comment.create(AuthorId: subject.id, PostId: @post.id,
-                             Text: 'Unit test for the method of most_recent_comments')
-
-    recent = @post.most_recent_comments
-
-    expect(recent).to eq [comment]
+    expect(post.last_5_comments.length).to eq(5)
   end
 end

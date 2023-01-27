@@ -1,45 +1,30 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
-  subject { User.new(Name: 'Tom', Image: 'https://unsplash.com/photos/F_-0BxGuVvo', Bio: 'Teacher from Mexico.') }
-
-  before { subject.save }
-
-  it 'Tom is the required name' do
-    name = subject.Name
-
-    expect(name).to eq('Tom')
+  it 'Testing user without name' do
+    user = User.create
+    expect(user).to_not be_valid
   end
 
-  it 'Name must be given' do
-    subject.Name
-
-    expect(subject).to be_valid
+  it 'Testing user PostCounter number negative' do
+    user = User.create(Name: 'John', Image: 'www.google.com', Bio: 'Male')
+    user.PostCounter = -10
+    expect(user).to_not be_valid
   end
 
-  it 'PostCounter is zero' do
-    value = subject.PostCounter
-
-    expect(value).to eq 0
+  it 'Testing user PostCounter decimal number' do
+    user = User.create(Name: 'John', Image: 'www.google.com', Bio: 'Male')
+    user.PostCounter = 10.2
+    expect(user).to_not be_valid
   end
 
-  it 'Valid PostCounter' do
-    subject.PostCounter
+  it 'User last 3 posts' do
+    user = User.create(Name: 'John', Image: 'www.google.com', Bio: 'Male')
+    Post.create(user_id: 1, Title: 'Title1', Text: 'Hello1')
+    Post.create(user_id: 1, Title: 'Title1', Text: 'Hello2')
+    Post.create(user_id: 1, Title: 'Title1', Text: 'Hello3')
+    Post.create(user_id: 1, Title: 'Title1', Text: 'Hello4')
 
-    expect(subject).to be_valid
-  end
-
-  it 'recent_posts should return zero' do
-    posts = subject.latest_posts
-
-    expect(posts).to eq []
-  end
-
-  it 'recent_posts should return 3 of the most recent post' do
-    post = Post.create(AuthorId: subject.id, Title: 'check post', Text: 'Unit test for the method of most_recent_posts')
-
-    recent = subject.latest_posts
-
-    expect(recent).to eq [post]
+    expect(user.last_3_posts.length).to eq(3)
   end
 end
