@@ -14,3 +14,16 @@ RSpec.describe User, type: :model do
     expect(subject).to_not be_valid
   end
 end
+
+
+# def last_3_posts
+#   posts.order(created_at: :DESC).limit(3)
+# end
+
+# it 'Has a most_recent_5_comments method' do
+#   expect(subject).to respond_to(:most_recent_5_comments)
+# end
+
+# it 'Has a last_3_posts method' do
+#   expect(subject).to respond_to(:last_3_posts)
+# end
