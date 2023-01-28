@@ -1,5 +1,6 @@
 require 'rails_helper'
 
+
 RSpec.describe Post, type: :model do
   it 'Testing for no Title' do
     post = Post.create
