@@ -20,10 +20,18 @@ end
 #   posts.order(created_at: :DESC).limit(3)
 # end
 
-# it 'Has a most_recent_5_comments method' do
-#   expect(subject).to respond_to(:most_recent_5_comments)
-# end
 
 # it 'Has a last_3_posts method' do
 #   expect(subject).to respond_to(:last_3_posts)
+# end
+
+# method in post.rb
+# def most_recent_5_comments
+#   comments.order(created_at: :DESC).limit(5)
+# end
+
+
+# Test in post.rb
+# it 'Has a most_recent_5_comments method' do
+#   expect(subject).to respond_to(:most_recent_5_comments)
 # end
