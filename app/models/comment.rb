@@ -1,5 +1,4 @@
 class Comment < ApplicationRecord
-  
   after_save :update_the_comments_counter
 
   belongs_to :user, class_name: 'User', foreign_key: 'AuthorId'
