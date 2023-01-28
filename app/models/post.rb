@@ -1,5 +1,4 @@
 class Post < ApplicationRecord
-  
   after_save :update_post_counter
 
   belongs_to :user, class_name: 'User', foreign_key: 'AuthorId'
