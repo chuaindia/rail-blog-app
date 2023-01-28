@@ -1,20 +1,19 @@
-require 'rails_helper'
+require './spec/rails_helper'
 
 RSpec.describe Comment, type: :model do
-  subject { User.new(Name: 'Tom', Image: 'https://unsplash.com/photos/F_-0BxGuVvo', Bio: 'Teacher from Mexico.') }
+  subject { Comment.create(PostId: 1, AuthorId: 2, Text: 'Hi Tom!') }
 
   before { subject.save }
 
-  before(:each) do
-    @post = Post.create(AuthorId: subject.id, Title: 'check post',
-                        Text: 'Unit test for the method of most_recent_posts')
-    @comment = Comment.create(AuthorId: subject.id, PostId: @post.id,
-                              Text: 'Unit test for the method of most_recent_comments')
+  it 'should test for author_id' do
+    expect(subject.AuthorId).to eql 2
   end
 
-  it 'Text should match with the input text' do
-    text = @comment.Text
+  it 'should test for post_id' do
+    expect(subject.PostId).to eql 1
+  end
 
-    expect(text).to eq('Unit test for the method of most_recent_comments')
+  it 'should test for text' do
+    expect(subject.Text).to eql 'Hi Tom!'
   end
 end

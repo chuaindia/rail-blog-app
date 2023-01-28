@@ -1,23 +1,15 @@
-require 'rails_helper'
+require './spec/rails_helper'
 
 RSpec.describe Like, type: :model do
-  # pending "add some examples to (or delete) #{__FILE__}"
-  subject { User.new(Name: 'Tom', Image: 'https://unsplash.com/photos/F_-0BxGuVvo', Bio: 'Teacher from Mexico.') }
+  subject { Like.create(AuthorId: 1, PostId: 2) }
 
   before { subject.save }
 
-  before(:each) do
-    @post = Post.create(AuthorId: subject.id, Title: 'check post',
-                        Text: 'Unit test for the method of most_recent_posts')
-    @comment = Comment.create(AuthorId: subject.id, PostId: @post.id,
-                              Text: 'Unit test for the method of most_recent_comments')
+  it 'should test for author_id' do
+    expect(subject.AuthorId).to eql 1
   end
 
-  it 'Correct AuthorId is present' do
-    like = Like.new(AuthorId: subject.id, PostId: @post.id)
-
-    id = like.AuthorId
-
-    expect(id).to eq(subject.id)
+  it 'should test for post_id' do
+    expect(subject.PostId).to eql 2
   end
 end

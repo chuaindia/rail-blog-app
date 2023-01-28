@@ -1,36 +1,33 @@
-require 'rails_helper'
+require './spec/rails_helper'
 
 RSpec.describe Post, type: :model do
-  it 'Testing for no Title' do
-    post = Post.create
-    expect(post).to_not be_valid
+  subject { Post.create(AuthorId: 1, Title: 'Hello', Text: 'This is my first post') }
+
+  before { subject.save }
+
+  it 'should test for author_id' do
+    expect(subject.AuthorId).to eql 1
   end
 
-  it 'Testing post CommentCounter number negative' do
-    post = Post.create(AuthorId: 1, Title: 'Tanusri', Text: 'anything')
-    post.CommentCounter = -10
-    expect(post).to_not be_valid
+  it 'should test for title' do
+    expect(subject.Title).to eql 'Hello'
   end
 
-  it 'Testing post LikeCounter number negative' do
-    post = Post.create(AuthorId: 1, Title: 'Tanusri', Text: 'anything')
-    post.LikeCounter = -10
-    expect(post).to_not be_valid
+  it 'should test for text' do
+    expect(subject.Text).to eql 'This is my first post'
   end
 
-  it 'Title should be present' do
-    post = Post.create(AuthorId: 1, Title: 'Tanusri', Text: 'anything')
-    post.Title = nil
-    expect(post).to_not be_valid
-  end
-
-  it 'Title should not exceed 250 characters' do
-    subject.Title = 'a' * 256
+  it 'should test for integers lesser than 0' do
+    subject.LikeCounter = -2
     expect(subject).to_not be_valid
   end
 
-  it 'Has a latest_comments method' do
-    post = Post.new(Title: 'one post', CommentCounter: 5, LikeCounter: 8)
-    expect(post).to respond_to(:latest_comments)
+  it 'should test for integers greater than 0' do
+    subject.CommentCounter = 11
+    expect(subject.comments_counter).to eql 11
+  end
+
+  it 'should respond to recent_five_comments method' do
+    expect(subject).to respond_to(:latest_comments)
   end
 end

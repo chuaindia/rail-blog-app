@@ -1,25 +1,36 @@
-require 'rails_helper'
+require './spec/rails_helper'
 
 RSpec.describe User, type: :model do
-  it 'Testing user without name' do
-    user = User.create
-    expect(user).to_not be_valid
+  subject { User.new(Name: 'Tom', Image: 'https://unsplash.com/photos/F_-0BxGuVvo', Bio: 'Teacher from Mexico.', PostCounter: 0) }
+
+  before { subject.save }
+
+  it 'should test for presence of name' do
+    subject.Name = nil
+    expect(subject).to_not be_valid
   end
 
-  it 'Testing user PostCounter number negative' do
-    user = User.create(Name: 'Tanusri', Image: 'https://unsplash.com/photos/F_-0BxGuVvo', Bio: 'Microverse')
-    user.PostCounter = -10
-    expect(user).to_not be_valid
+  it 'should test for empty name' do
+    subject.Name = ''
+    expect(subject).to_not be_valid
   end
 
-  it 'Name should be present' do
-    user = User.create(Name: 'Tanusri', Image: 'https://unsplash.com/photos/F_-0BxGuVvo', Bio: 'Microverse')
-    user.Name = nil
-    expect(user).to_not be_valid
+  it 'should test for integer' do
+    subject.PostCounter = 'a'
+    expect(subject).to_not be_valid
   end
 
-  it 'Has a latest_posts method' do
-    user = User.new(Name: 'Tanusri', PostCounter: 9)
-    expect(user).to respond_to(:latest_posts)
+  it 'should test for integers lesser than 0' do
+    subject.PostCounter = -1
+    expect(subject).to_not be_valid
+  end
+
+  it 'should test for integers greater than 0' do
+    subject.PostCounter = 11
+    expect(subject).to be_valid
+  end
+
+  it 'should respond to recent_three_posts method' do
+    expect(subject).to respond_to(:latest_posts)
   end
 end
