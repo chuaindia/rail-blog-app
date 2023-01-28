@@ -1,5 +1,4 @@
 class Post < ApplicationRecord
-  
   after_save :update_post_counter
 
   belongs_to :user, class_name: 'User', foreign_key: 'AuthorId'
@@ -16,4 +15,3 @@ class Post < ApplicationRecord
 
   private :updates_the_posts_counter
 end
-
