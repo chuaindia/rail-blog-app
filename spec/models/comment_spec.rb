@@ -1,6 +1,4 @@
 require 'rails_helper'
-
-
 RSpec.describe Comment, type: :model do
   subject { User.new(Name: 'Tom', Image: 'https://unsplash.com/photos/F_-0BxGuVvo', Bio: 'Teacher from Mexico.') }
 
