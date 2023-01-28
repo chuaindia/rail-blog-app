@@ -15,12 +15,13 @@ RSpec.describe User, type: :model do
   end
 end
 
+# -------------------------------------
 # method in user.rb
 # def last_3_posts
 #   posts.order(created_at: :DESC).limit(3)
 # end
 
-# Test in user.rb
+# Test in user.rb(can be included if all otheres run for the above method)
 # it 'Has a last_3_posts method' do
 #   expect(subject).to respond_to(:last_3_posts)
 # end
