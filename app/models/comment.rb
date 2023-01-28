@@ -7,3 +7,4 @@ class Comment < ApplicationRecord
     Post.find(post.id).increment!(:comments_counter)
   end
 end
+
