@@ -1,6 +1,4 @@
 require 'rails_helper'
-
-
 RSpec.describe Like, type: :model do
   # pending "add some examples to (or delete) #{__FILE__}"
   subject { User.new(Name: 'Tom', Image: 'https://unsplash.com/photos/F_-0BxGuVvo', Bio: 'Teacher from Mexico.') }
