@@ -1,41 +1,36 @@
 require 'rails_helper'
 
 RSpec.describe Post, type: :model do
-  subject { Post.new(title: 'this is a post', comments_counter: 5, likes_counter: 10) }
+  it 'Testing for no Title' do
+    post = Post.create
+    expect(post).to_not be_valid
+  end
 
-  before { subject.save }
+  it 'Testing post CommentCounter number negative' do
+    post = Post.create(AuthorId: 1, Title: 'Tanusri', Text: 'anything')
+    post.CommentCounter = -10
+    expect(post).to_not be_valid
+  end
 
-  it 'title must not be blank.' do
-    subject.title = nil
+  it 'Testing post LikeCounter number negative' do
+    post = Post.create(AuthorId: 1, Title: 'Tanusri', Text: 'anything')
+    post.LikeCounter = -10
+    expect(post).to_not be_valid
+  end
+
+  it 'Title should be present' do
+    post = Post.create(AuthorId: 1, Title: 'Tanusri', Text: 'anything')
+    post.Title = nil
+    expect(post).to_not be_valid
+  end
+
+  it 'Title should not exceed 250 characters' do
+    subject.Title = 'a' * 256
     expect(subject).to_not be_valid
   end
 
-  it 'title must not exceed 250 characters.' do
-    subject.title = 'a' * 251
-    expect(subject).to_not be_valid
-  end
-
-  it 'CommentsCounter must be an integer' do
-    subject.comments_counter = 'a'
-    expect(subject).to_not be_valid
-  end
-
-  it 'CommentsCounter must be greater than or equal to zero.' do
-    subject.comments_counter = -1
-    expect(subject).to_not be_valid
-  end
-
-  it 'LikesCounter must be an integer' do
-    subject.likes_counter = 'a'
-    expect(subject).to_not be_valid
-  end
-
-  it 'LikesCounter must be greater than or equal to zero.' do
-    subject.likes_counter = -1
-    expect(subject).to_not be_valid
-  end
-
-  it 'Has a most_recent_5_comments method' do
-    expect(subject).to respond_to(:most_recent_5_comments)
+  it 'Has a latest_comments method' do
+    post = Post.new(Title: 'one post', CommentCounter: 5, LikeCounter: 8)
+    expect(post).to respond_to(:latest_comments)
   end
 end

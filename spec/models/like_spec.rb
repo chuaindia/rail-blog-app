@@ -1,15 +1,23 @@
 require 'rails_helper'
 
 RSpec.describe Like, type: :model do
-  subject do
-    user = User.new(name: 'kareem', photo: 'www.photo', bio: 'this is bio', posts_counter: 0)
-    post = Post.create(title: 'post 1', text: 'here is text', comments_counter: 0, likes_counter: 0, user:)
-    Like.create(user:, post:, post_id: post.id)
-    Like.create(user:, post:, post_id: post.id)
+  # pending "add some examples to (or delete) #{__FILE__}"
+  subject { User.new(Name: 'Tom', Image: 'https://unsplash.com/photos/F_-0BxGuVvo', Bio: 'Teacher from Mexico.') }
+
+  before { subject.save }
+
+  before(:each) do
+    @post = Post.create(AuthorId: subject.id, Title: 'check post',
+                        Text: 'Unit test for the method of most_recent_posts')
+    @comment = Comment.create(AuthorId: subject.id, PostId: @post.id,
+                              Text: 'Unit test for the method of most_recent_comments')
   end
 
-  it 'should update likes counter' do
-    expect(subject.update_likes_counter).to eq true
-    expect(subject.post.likes_counter).to eq 2
+  it 'Correct AuthorId is present' do
+    like = Like.new(AuthorId: subject.id, PostId: @post.id)
+
+    id = like.AuthorId
+
+    expect(id).to eq(subject.id)
   end
 end

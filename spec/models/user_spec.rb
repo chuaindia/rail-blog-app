@@ -1,38 +1,25 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
-  subject { User.new(name: 'Kareem', posts_counter: 10) }
-
-  before { subject.save }
-
-  it 'Name of user must not be blank.' do
-    subject.name = nil
-    expect(subject).to_not be_valid
+  it 'Testing user without name' do
+    user = User.create
+    expect(user).to_not be_valid
   end
-  it 'Name of user must not be blank.' do
-    subject.posts_counter = -1
-    expect(subject).to_not be_valid
+
+  it 'Testing user PostCounter number negative' do
+    user = User.create(Name: 'Tanusri', Image: 'https://unsplash.com/photos/F_-0BxGuVvo', Bio: 'Microverse')
+    user.PostCounter = -10
+    expect(user).to_not be_valid
+  end
+
+  it 'Name should be present' do
+    user = User.create(Name: 'Tanusri', Image: 'https://unsplash.com/photos/F_-0BxGuVvo', Bio: 'Microverse')
+    user.Name = nil
+    expect(user).to_not be_valid
+  end
+
+  it 'Has a latest_posts method' do
+    user = User.new(Name: 'Tanusri', PostCounter: 9)
+    expect(user).to respond_to(:latest_posts)
   end
 end
-
-# -------------------------------------
-# method in user.rb
-# def last_3_posts
-#   posts.order(created_at: :DESC).limit(3)
-# end
-
-# Test in user.rb(can be included if all otheres run for the above method)
-# it 'Has a last_3_posts method' do
-#   expect(subject).to respond_to(:last_3_posts)
-# end
-
-# method in post.rb
-# def most_recent_5_comments
-#   comments.order(created_at: :DESC).limit(5)
-# end
-
-
-# Test in post.rb
-# it 'Has a most_recent_5_comments method' do
-#   expect(subject).to respond_to(:most_recent_5_comments)
-# end
