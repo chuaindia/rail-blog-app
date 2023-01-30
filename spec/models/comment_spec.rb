@@ -16,4 +16,10 @@ RSpec.describe Comment, type: :model do
   it 'should test for text' do
     expect(subject.Text).to eql 'Hi Tom!'
   end
+
+  it 'Testing post LikeCounter number negative' do
+    post = Post.create(AuthorId: 1, Title: 'John', Text: 'anything')
+    post.LikeCounter = -10
+    expect(post).to_not be_valid
+  end
 end
