@@ -4,6 +4,9 @@ class User < ApplicationRecord
   has_many :likes, foreign_key: 'AuthorId'
 
   def most_recent_posts
-    Post.where(AuthorId: id).last(3)
+    Post.includes(AuthorId: id).last(3)
   end
+
+  validates :Name, presence: true
+  validates :PostCounter, numericality: { greater_than_or_equal_to: 0 }
 end
