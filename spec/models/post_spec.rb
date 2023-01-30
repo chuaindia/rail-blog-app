@@ -24,10 +24,15 @@ RSpec.describe Post, type: :model do
 
   it 'should test for integers greater than 0' do
     subject.CommentCounter = 11
-    expect(subject.comments_counter).to eql 11
+    expect(subject.CommentCounter).to eql 11
+  end
+
+  it 'Title should not exceed 250 characters' do
+    subject.Title = 'a' * 300
+    expect(subject).to_not be_valid
   end
 
   it 'should respond to recent_five_comments method' do
-    expect(subject).to respond_to(:latest_comments)
+    expect(subject).to respond_to(:most_recent_comments)
   end
 end
