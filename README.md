@@ -221,11 +221,11 @@ I would like to thank...
 
 - **[What is the main objective of this branch?]**
 
-  - [Construction of different classes using RUBY]
+  - [A website of Users able to put comments, Likes, Posts]
 
-- **[What is the symbol for class inheritance]**
+- **[Name some special key words]**
 
-  - ["<" sign. on the left hand side the derived class name will appear and the parent classname will be placed on the right hand side.]
+  - [migration, routes]
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
