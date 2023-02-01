@@ -57,7 +57,7 @@ After you're finished please remove all the comments and instructions!
 
 > Describe your project in 1 or 2 sentences.
 
-**[Rail-Blog-App]** This is a blog website that allows users to make comments, likes and posts.
+**[Rail-Blog-App]** This is a blog website that allows users to make comments, likes and posts. The user can freely interact with the website and can give their opinions.
 
 ## 🛠 Built With <a name="built-with"></a>
 
@@ -65,6 +65,8 @@ After you're finished please remove all the comments and instructions!
 
 <details>
   <summary>Client</summary>
+  <summary>Server</summary>
+  <summary>Database</summary>
  </details>
 
 
@@ -72,9 +74,9 @@ After you're finished please remove all the comments and instructions!
 
 > Describe between 1-3 key features of the application.
 
-- **[Make post]**
-- **[Make comments]**
-- **[Make likes]**
+- **[Add Posts]**
+- **[Add comments on posts]**
+- **[User can make likes on post]**
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -84,16 +86,16 @@ After you're finished please remove all the comments and instructions!
 
 ## 💻 Getting Started <a name="getting-started"></a>
 
-> Describe how a new developer could make use of your project.
-
 To get a local copy up and running, follow these steps.
 
 ### Prerequisites
 
 In order to run this project you need:
 
+- Visual Studio Code
 - Ruby
 - Ruby on Rails
+- PostgreSQL Server
 - Gitflow
 
 <!--
@@ -108,6 +110,10 @@ Example command:
 
 Clone this repository to your desired folder:
 
+cd my-folder
+  git clone git@github.com:chuaindia/rail-blog-app.git
+  cd rail-blog-app
+
 <!--
 Example commands:
 
@@ -121,6 +127,10 @@ Example commands:
 
 Install this project with:
 
+bundle install
+rails db:create
+rails db:migrate
+
 <!--
 Example command:
 
@@ -130,9 +140,11 @@ Example command:
 ```
 --->
 
-### Usage
+### Start
 
-To run the project, execute the following command:
+To start the application, execute the following command:
+
+rails server
 
 <!--
 Example command:
@@ -145,6 +157,8 @@ Example command:
 ### Run tests
 
 To run tests, run the following command:
+
+rspec
 
 <!--
 Example command:
@@ -172,14 +186,21 @@ Example:
 
 ## 👥 Authors <a name="authors"></a>
 
-> Mention all of the collaborators of this project.
-
-
 👤 **Tanusri Ghosh**
 
 - [GitHub:](https://github.com/chuaindia)
 - [Twitter:] https://twitter.com/chuaghosh@
 - [LinkedIn:] https://linkedin.com/in/tanusrighosh
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+## 🔭 Future Features <a name="future-features"></a>
+
+> Describe 1 - 3 features you will add to the project.
+
+- [ ] **An user will be able to create account and post article easily**
+- [ ] **Prediction of Article contents**
+- [ ] **A more exciting user interface**
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -209,7 +230,7 @@ If you like this project...
 
 > Give credit to everyone who inspired your codebase.
 
-I would like to thank...
+I would like to thank all my course mates who helped me a lot.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -225,7 +246,7 @@ I would like to thank...
 
 - **[Name some special key words]**
 
-  - [migration, routes]
+  - [Controller specs,migration, routes]
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
